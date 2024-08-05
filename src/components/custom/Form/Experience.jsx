@@ -17,6 +17,7 @@ const formField = {
 function Experience() {
   const [experienceList, setExperienceList] = useState(formField);
   const [isLoading, setIsLoading] = useState(false);
+
   return (
     <div className="max-h-[100dvh]">
       <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
@@ -38,13 +39,15 @@ function Experience() {
             </div>
             <div>
               <label className="text-sm">Start Date</label>
-              <Input name="address" required />
+              <Input name="address" type="date" required />
             </div>
             <div>
-              <label className="text-sm">End Date</label>
-              <Input name="phone" />
+              <label className="text-sm">
+                End Date (Leave blank if still working)
+              </label>
+              <Input name="phone" type="date" requried />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-sm">
               <label>Job Summary</label>
               <TextEditor />
             </div>
