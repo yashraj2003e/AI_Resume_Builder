@@ -1,13 +1,15 @@
+// Summary.js
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useResumeContext } from "../../../contexts/ResumeContext";
 import { Button } from "../../ui/button";
 import { Textarea } from "../../ui/textarea";
 import { AIModel } from "../../../../service/AIModel";
-import { toast, Toaster } from "react-hot-toast";
 import Loader2 from "../Loader2";
 import { Brain } from "lucide-react";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
   const { resumeInfo, setResumeInfo } = useResumeContext();
@@ -17,12 +19,11 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
     setResumeInfo({ ...resumeInfo, ["summary"]: e.target.value });
   }
 
-  const GenerateSummaryFromAI = async () => {
+  async function GenerateSummaryFromAI() {
     if (resumeInfo.summary.length < 100) {
-      toast.error("Job summary must be of at least 100 words!", {
-        style: {
-          minWidth: "26vw",
-        },
+      toast.error("Summary must be of atleast 100 words!", {
+        position: "top-center",
+        style: { minWidth: "max-content" },
       });
       return;
     }
@@ -44,7 +45,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   function onSave(e) {
     e.preventDefault();
@@ -52,7 +53,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
 
   return (
     <div className="max-h-[100dvh]">
-      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
+      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
         {isLoading && <Loader2 />}
         <h2 className="font-bold text-lg">Summary</h2>
         <form onSubmit={onSave}>
@@ -78,7 +79,6 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
             </div>
           </div>
         </form>
-        <Toaster />
       </div>
       {AIGeneratedSummary.length > 0 && (
         <div className="p-5 shadow-lg rounded-lg border-b-primary border-b-4 mt-5 overflow-scroll text-justify max-h-[30dvh]">

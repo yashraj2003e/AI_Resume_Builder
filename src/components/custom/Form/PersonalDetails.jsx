@@ -3,23 +3,17 @@ import { useResumeContext } from "../../../contexts/ResumeContext";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import GlobalAPI from "../../../../service/GlobalAPI";
-import { useEffect, useState } from "react";
-import Loader2 from "../Loader2";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
 
-function PersonalDetails() {
+PersonalDetails.propTypes = {
+  setIsLoading: PropTypes.func.isRequired,
+};
+
+function PersonalDetails({ setIsLoading }) {
   const { resumeId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useResumeContext();
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await GlobalAPI.getUserResumeData(resumeId);
-      const data = response.data.data[0];
-      console.log(data);
-    }
-    fetchData();
-  }, [resumeId]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -43,16 +37,11 @@ function PersonalDetails() {
       };
 
       const updatePromise = GlobalAPI.UpdateResumeDetails(resumeId, data);
-
-      toast.promise(updatePromise, {
-        loading: "Loading",
-        success: "Saved Successfully",
-        error: "Error Saving Data",
-      });
-
       await updatePromise;
+      toast.success("Saved successfully !", { position: "top-center" });
     } catch (e) {
-      toast.error("Error While Saving");
+      console.log(e);
+      toast.error("Some error occurred !", { position: "top-center" });
     } finally {
       setIsLoading(false);
     }
@@ -60,8 +49,7 @@ function PersonalDetails() {
 
   return (
     <div>
-      {isLoading && <Loader2 />}
-      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
+      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
         <h2 className="font-bold text-lg">Personal Details</h2>
         <p>Get started with the basic information</p>
         <form onSubmit={handleSubmit}>
@@ -122,7 +110,6 @@ function PersonalDetails() {
             <Button type="submit">Save</Button>
           </div>
         </form>
-        <Toaster />
       </div>
     </div>
   );
