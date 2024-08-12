@@ -22,12 +22,16 @@ function EducationalPreview() {
             {education.universityName}
           </h2>
           <div className="justify-between flex my-1 text-sm sm:text-md flex-wrap">
-            <h2>
-              {education.degree} in {education.major}
-            </h2>
-            <span className="text-md">
-              {education.startDate} - {education.endDate}
-            </span>
+            {education.degree && (
+              <h2>
+                {education.degree} in {education.major}
+              </h2>
+            )}
+            {education.startDate && (
+              <span className="text-md">
+                {education.startDate} - {education.endDate}
+              </span>
+            )}
           </div>
           <p className="text-justify text-sm">{education.description}</p>
         </div>

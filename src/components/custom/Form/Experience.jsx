@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import ExperienceItem from "./ExperienceItem";
 import { useResumeContext } from "../../../contexts/ResumeContext";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-
-import PropTypes from "prop-types";
 
 const data2 = [
   {
