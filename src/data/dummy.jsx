@@ -72,17 +72,17 @@ export default {
     {
       id: 1,
       name: "React",
-      rating: 100,
+      rating: 40,
     },
     {
       id: 1,
       name: "MySql",
-      rating: 80,
+      rating: 60,
     },
     {
       id: 1,
       name: "React Native",
-      rating: 100,
+      rating: 20,
     },
   ],
 };

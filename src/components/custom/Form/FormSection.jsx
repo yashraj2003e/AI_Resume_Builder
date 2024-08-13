@@ -33,12 +33,14 @@ function FormSection({ setIsLoading, visited }) {
               <ArrowLeft />
             </Button>
           )}
-          <Button
-            className="flex gap-2"
-            onClick={() => setActiveFormIndex((value) => value + 1)}
-          >
-            Next <ArrowRight />
-          </Button>
+          {activeFormIndex <= 4 && (
+            <Button
+              className="flex gap-2"
+              onClick={() => setActiveFormIndex((value) => value + 1)}
+            >
+              Next <ArrowRight />
+            </Button>
+          )}
         </div>
       </div>
 

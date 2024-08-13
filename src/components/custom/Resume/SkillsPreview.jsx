@@ -9,7 +9,7 @@ function SkillsPreview() {
         className="text-center font-bold text-2xl mb-2 mt-[-0.75rem]"
         style={{ color: `${theme}` }}
       >
-        Skills
+        Technical Skills
       </h2>
       <hr className="border-2" style={{ borderColor: `${theme}` }} />
       <div className="grid grid-cols-2 gap-3 my-4">
