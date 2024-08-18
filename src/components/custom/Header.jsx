@@ -23,7 +23,7 @@ function Header() {
         </div>
       ) : (
         <Link to={"/auth/sign-in"}>
-          <Button>Get Started</Button>
+          <Button variant="gooeyRight">Get Started</Button>
         </Link>
       )}
     </div>

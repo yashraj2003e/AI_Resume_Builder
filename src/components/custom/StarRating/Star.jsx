@@ -4,10 +4,9 @@ const Filled = ({ onHoverIn, onHoverOut, onClick }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
-    width={50}
-    height={40}
-    fill="#FFC40C"
-    stroke="#FFC40C"
+    className="w-10"
+    fill="#A020F0"
+    stroke="#A020F0"
     onClick={onClick}
     style={{ cursor: "pointer" }}
     onMouseEnter={onHoverIn}
@@ -21,8 +20,7 @@ const Unfilled = ({ onHoverIn, onHoverOut, onClick }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    width={50}
-    height={40}
+    className="w-10"
     viewBox="0 0 24 24"
     stroke="rgb(22,2,2)"
     onClick={onClick}
@@ -43,7 +41,7 @@ export default function Star({ data, setData, rating, starId }) {
   const [tempRating, setTempRating] = useState(rating);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="flex justify-center">
       {Array.from({ length: 5 }, (_, i) => (
         <RenderStars
           key={i}

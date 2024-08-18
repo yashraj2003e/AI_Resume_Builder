@@ -55,14 +55,13 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
     <div className="max-h-[100dvh]">
       <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
         {isLoading && <Loader2 />}
-        <h2 className="font-bold text-lg">Summary</h2>
+        <h2 className="font-bold text-2xl">Summary</h2>
         <form onSubmit={onSave}>
           <div>
             <div className="flex justify-between items-center">
               <label>Add Summary for your job title</label>
               <Button
                 className="border-primary text-primary gap-2"
-                size="sm"
                 variant="outline"
                 onClick={GenerateSummaryFromAI}
               >
@@ -70,7 +69,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
               </Button>
             </div>
             <Textarea
-              className="mt-2"
+              className="mt-2 text-md"
               defaultValue={resumeInfo.summary}
               onChange={handleInputChange}
             />

@@ -23,13 +23,16 @@ function FormSection({ setIsLoading, visited }) {
     <div className="px-4 py-4">
       <div className="flex justify-between items-center">
         <div>
-          <Button variant="outline" size="sm" className="flex gap-2">
+          <Button variant="outline" className="flex gap-2">
             <LayoutGrid /> Theme
           </Button>
         </div>
         <div className="flex gap-2">
           {activeFormIndex > 1 && (
-            <Button onClick={() => setActiveFormIndex((value) => value - 1)}>
+            <Button
+              onClick={() => setActiveFormIndex((value) => value - 1)}
+              variant="ringHover"
+            >
               <ArrowLeft />
             </Button>
           )}
@@ -37,6 +40,7 @@ function FormSection({ setIsLoading, visited }) {
             <Button
               className="flex gap-2"
               onClick={() => setActiveFormIndex((value) => value + 1)}
+              variant="ringHover"
             >
               Next <ArrowRight />
             </Button>

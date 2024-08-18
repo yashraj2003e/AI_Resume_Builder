@@ -97,7 +97,7 @@ function EducationItem({
   return (
     <div className="">
       <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
-        <h2 className="font-bold text-lg">
+        <h2 className="font-bold text-2xl">
           Education {tabIndex + 1}{" "}
           {tabIndex === 3
             ? "(Maximum of 4 Educational Details can be added)"
@@ -106,7 +106,7 @@ function EducationItem({
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 mt-2 gap-3">
             <div>
-              <label className="text-sm">Institute Name</label>
+              <label className="text-lg">Institute Name</label>
               <Input
                 name="universityName"
                 value={educationalDetails.universityName}
@@ -114,47 +114,47 @@ function EducationItem({
               />
             </div>
             <div>
-              <label className="text-sm">Location</label>
+              <label className="text-lg">Location</label>
               <Input
                 name="universityName"
                 value={educationalDetails.universityName}
                 onChange={handleUpdate}
               />
             </div>
-            <div>
-              <label className="text-sm">Major</label>
+            <div className="mt-1">
+              <label className="text-lg">Major</label>
               <Input
                 name="degree"
                 value={educationalDetails.degree}
                 onChange={handleUpdate}
               />
             </div>
-            <div>
-              <label className="text-sm">Degree</label>
+            <div className="mt-1">
+              <label className="text-lg">Degree</label>
               <Input
                 name="degree"
                 value={educationalDetails.degree}
                 onChange={handleUpdate}
               />
             </div>
-            <div>
-              <label className="text-sm">Start Date</label>
+            <div className="mt-1">
+              <label className="text-lg">Start Date</label>
               <Input
                 name="startDate"
                 value={educationalDetails.startDate}
                 onChange={handleUpdate}
               />
             </div>
-            <div>
-              <label className="text-sm">End Date</label>
+            <div className="mt-1">
+              <label className="text-lg">End Date</label>
               <Input
                 name="endDate"
                 value={educationalDetails.endDate}
                 onChange={handleUpdate}
               />
             </div>
-            <div className="col-span-2">
-              <label className="text-sm">Add description</label>
+            <div className="col-span-2 mt-1">
+              <label className="text-lg">Add description</label>
               <Textarea
                 name="description"
                 value={educationalDetails.description}
@@ -196,7 +196,7 @@ function EducationItem({
                   Next
                 </Button>
               )}
-              <Button>Save</Button>
+              <Button variant="gooeyRight">Save</Button>
             </div>
           </div>
         </form>

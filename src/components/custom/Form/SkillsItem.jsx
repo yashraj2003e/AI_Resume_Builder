@@ -49,7 +49,7 @@ function SkillItem({
   return (
     <div className="">
       <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
-        <h2 className="font-bold text-lg">
+        <h2 className="font-bold text-2xl">
           Skill {tabIndex + 1}{" "}
           {tabIndex === 3
             ? "(Maximum of 4 Educational Details can be added)"
@@ -57,10 +57,10 @@ function SkillItem({
         </h2>
         <div className="grid grid-cols-2 mt-2 gap-3">
           <div>
-            <label className="text-sm">Name</label>
+            <label className="text-md">Name</label>
           </div>
           <div>
-            <label className="text-sm">Proficiency</label>
+            <label className="text-md">Proficiency</label>
           </div>
           <div>
             <Input />

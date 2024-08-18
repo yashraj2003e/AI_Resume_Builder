@@ -30,6 +30,7 @@ function ExperienceItem({
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [workSummary, setWorkSummary] = useState("");
+  const [currentWorking, setCurrentlyWorking] = useState(false);
 
   useEffect(() => {
     setTitle(experienceList.title || "");
@@ -113,30 +114,30 @@ function ExperienceItem({
   return (
     <div className="">
       <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
-        <h2 className="font-bold text-lg">
+        <h2 className="font-bold text-2xl">
           Experience {tabIndex + 1}{" "}
           {tabIndex === 3 ? "(Maximum of 4 Experiences can be added)" : ""}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 mt-2 gap-3">
             <div>
-              <label className="text-sm">Job Title</label>
+              <label className="text-lg">Job Title</label>
               <Input name="title" value={title} onChange={handleUpdates} />
             </div>
             <div>
-              <label className="text-sm">Company Name</label>
+              <label className="text-lg">Company Name</label>
               <Input
                 name="companyName"
                 value={companyName}
                 onChange={handleUpdates}
               />
             </div>
-            <div className="col-span-2">
-              <label className="text-sm">Job Location</label>
+            <div className="col-span-2 mt-1">
+              <label className="text-lg">Job Location</label>
               <Input name="city" value={city} onChange={handleUpdates} />
             </div>
-            <div>
-              <label className="text-sm">Start Date</label>
+            <div className="mt-1">
+              <label className="text-lg">Start Date</label>
               <Input
                 name="startDate"
                 type="date"
@@ -144,19 +145,29 @@ function ExperienceItem({
                 onChange={handleUpdates}
               />
             </div>
-            <div>
-              <label className="text-sm">
-                End Date (Leave blank if not applicable)
-              </label>
+            <div className="mt-1">
+              <label className="text-lg">End Date</label>
               <Input
                 name="endDate"
+                disabled={currentWorking}
                 type="date"
                 value={endDate}
                 onChange={handleUpdates}
               />
             </div>
-            <div className="col-span-2 text-sm">
-              <label>Job Summary</label>
+            <div></div>
+            <div>
+              <span className="space-x-2">
+                <input
+                  onClick={() => setCurrentlyWorking((value) => !value)}
+                  type="checkbox"
+                  className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label className="text-lg">Currently Working</label>
+              </span>
+            </div>
+            <div className="col-span-2 mt-[-1rem]">
+              <label className="text-lg">Job Summary</label>
               <TextEditor value1={workSummary} setValue={setWorkSummary} />
             </div>
           </div>
