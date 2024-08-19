@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   BtnBold,
   BtnItalic,
@@ -7,12 +6,11 @@ import {
   Toolbar,
   BtnBulletList,
 } from "react-simple-wysiwyg";
-export default function TextEditor() {
-  const [value, setValue] = useState("");
+export default function TextEditor({ value1, setValue }) {
   const onChange = (e) => setValue(e.target.value);
   return (
     <EditorProvider>
-      <Editor value={value} onChange={onChange}>
+      <Editor value={value1} onChange={onChange}>
         <Toolbar>
           <BtnBold />
           <BtnItalic />

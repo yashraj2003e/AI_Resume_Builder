@@ -3,23 +3,51 @@ import { useResumeContext } from "../../../contexts/ResumeContext";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import GlobalAPI from "../../../../service/GlobalAPI";
-import { useEffect, useState } from "react";
-import Loader2 from "../Loader2";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
+import { useEffect } from "react";
 
-function PersonalDetails() {
+PersonalDetails.propTypes = {
+  setIsLoading: PropTypes.func.isRequired,
+};
+
+function PersonalDetails({ setIsLoading }) {
   const { resumeId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useResumeContext();
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await GlobalAPI.getUserResumeData(resumeId);
-      const data = response.data.data[0];
-      console.log(data);
+    async function test() {
+      try {
+        if (!resumeInfo.firstName) {
+          setIsLoading(true);
+          const data = await GlobalAPI.getUserResumeData(resumeId);
+          const result = data.data.data;
+
+          if (result.length > 0) {
+            const { firstName, lastName, jobTitle, phone, address, email } =
+              result[0];
+            setResumeInfo((resumeInfo) => ({
+              ...resumeInfo,
+              firstName,
+              lastName,
+              jobTitle,
+              phone,
+              address,
+              email,
+            }));
+          }
+
+          console.log(1);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
     }
-    fetchData();
-  }, [resumeId]);
+    test();
+  }, []);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -43,16 +71,11 @@ function PersonalDetails() {
       };
 
       const updatePromise = GlobalAPI.UpdateResumeDetails(resumeId, data);
-
-      toast.promise(updatePromise, {
-        loading: "Loading",
-        success: "Saved Successfully",
-        error: "Error Saving Data",
-      });
-
       await updatePromise;
+      toast.success("Saved successfully !", { position: "top-center" });
     } catch (e) {
-      toast.error("Error While Saving");
+      console.log(e);
+      toast.error("Some error occurred !", { position: "top-center" });
     } finally {
       setIsLoading(false);
     }
@@ -60,14 +83,13 @@ function PersonalDetails() {
 
   return (
     <div>
-      {isLoading && <Loader2 />}
-      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-        <h2 className="font-bold text-lg">Personal Details</h2>
+      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5">
+        <h2 className="font-bold text-2xl">Personal Details</h2>
         <p>Get started with the basic information</p>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 mt-5 gap-3">
+          <div className="grid grid-cols-2 mt-3 gap-3">
             <div>
-              <label className="text-sm">First Name</label>
+              <label className="text-lg">First Name</label>
               <Input
                 name="firstName"
                 required
@@ -76,15 +98,15 @@ function PersonalDetails() {
               />
             </div>
             <div>
-              <label className="text-sm">Last Name</label>
+              <label className="text-lg">Last Name</label>
               <Input
                 name="lastName"
                 value={resumeInfo.lastName || ""}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="col-span-2">
-              <label className="text-sm">Job Title</label>
+            <div className="col-span-2 mt-1">
+              <label className="text-lg">Job Title</label>
               <Input
                 name="jobTitle"
                 required
@@ -92,8 +114,8 @@ function PersonalDetails() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="col-span-2">
-              <label className="text-sm">Address</label>
+            <div className="col-span-2 mt-1">
+              <label className="text-lg">Address</label>
               <Input
                 name="address"
                 required
@@ -101,16 +123,16 @@ function PersonalDetails() {
                 onChange={handleInputChange}
               />
             </div>
-            <div>
-              <label className="text-sm">Phone</label>
+            <div className="mt-1">
+              <label className="text-lg">Phone</label>
               <Input
                 name="phone"
                 value={resumeInfo.phone || ""}
                 onChange={handleInputChange}
               />
             </div>
-            <div>
-              <label className="text-sm">Email</label>
+            <div className="mt-1">
+              <label className="text-lg">Email</label>
               <Input
                 name="email"
                 value={resumeInfo.email || ""}
@@ -122,7 +144,6 @@ function PersonalDetails() {
             <Button type="submit">Save</Button>
           </div>
         </form>
-        <Toaster />
       </div>
     </div>
   );

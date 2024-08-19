@@ -9,7 +9,7 @@ function PersonalDetailsPreview() {
   const theme = resumeInfo?.themeColor;
   return (
     <div
-      className={`text-center shadow-2xl border-t-[2.5dvh] px-4 overflow-scroll rounded-t-2xl h-[85dvh]`}
+      className={`text-center shadow-2xl border-t-[2.5dvh] px-4 overflow-scroll rounded-t-2xl sm:h-[85dvh]`}
       style={{ borderColor: `${theme}` }}
     >
       <h2 className={`font-bold text-3xl`} style={{ color: `${theme}` }}>

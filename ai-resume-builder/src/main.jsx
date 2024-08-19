@@ -6,10 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import EditResume from "./Pages/EditResume.jsx";
 import Loader2 from "./components/custom/Loader2.jsx";
-
-// import SignInPage from "./auth/sign-in/index.jsx";
-// import Home from "./Pages/Home.jsx";
-// import Dashboard from "./Pages/Dashboard.jsx";
+import Error from "./Pages/Error.jsx";
 
 const SignInPage = lazy(() => import("./auth/sign-in/SignIn.jsx"));
 const Home = lazy(() => import("./Pages/Home.jsx"));
@@ -23,25 +20,30 @@ if (!PUBLISHABLE_KEY) {
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    element: <App />,
+    errorElement: <Error />,
     children: [
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "/",
+        element: <Home />,
       },
       {
-        path: "dashboard/resume/:resumeId/edit",
-        element: <EditResume />,
+        element: <App />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "dashboard/resume/:resumeId/edit",
+            element: <EditResume />,
+          },
+        ],
+      },
+      {
+        path: "/auth/sign-in",
+        element: <SignInPage />,
       },
     ],
-  },
-  {
-    path: "/auth/sign-in",
-    element: <SignInPage />,
   },
 ]);
 

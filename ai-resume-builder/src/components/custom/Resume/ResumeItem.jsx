@@ -11,7 +11,7 @@ const ResumeItem = ({ resume }) => {
         </div>
         <h2>{resume.title}</h2>
       </div>
-    </Link>
+    </Link> 
   );
 };
 

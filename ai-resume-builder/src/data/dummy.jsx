@@ -21,7 +21,7 @@ export default {
         "Designed, developed, and maintained full-stack applications using React and Node.js.",
         "Implemented responsive user interfaces with React, ensuring seamless user experiences across various devices and browsers.",
         "Maintaining the React Native in-house organization application.",
-        "CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end and back-end systems.",
+        "Created RESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end and back-end systems.",
       ],
     },
     {
@@ -37,7 +37,7 @@ export default {
         "Designed, developed, and maintained full-stack applications using React and Node.js.",
         "Implemented responsive user interfaces with React, ensuring seamless user experiences across various devices and browsers.",
         "Maintaining the React Native in-house organization application.",
-        "CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end and back-end systems.",
+        "Created RESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end and back-end systems.",
       ],
     },
   ],
@@ -63,26 +63,5 @@ export default {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
     },
   ],
-  skills: [
-    {
-      id: 1,
-      name: "Angular",
-      rating: 80,
-    },
-    {
-      id: 1,
-      name: "React",
-      rating: 100,
-    },
-    {
-      id: 1,
-      name: "MySql",
-      rating: 80,
-    },
-    {
-      id: 1,
-      name: "React Native",
-      rating: 100,
-    },
-  ],
+  skills: [],
 };

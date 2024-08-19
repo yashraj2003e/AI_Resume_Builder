@@ -1,62 +1,92 @@
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-import TextEditor from "../TextEditor";
+import { useEffect, useState } from "react";
+import ExperienceItem from "./ExperienceItem";
+import { useResumeContext } from "../../../contexts/ResumeContext";
+import "react-toastify/dist/ReactToastify.css";
+import GlobalAPI from "../../../../service/GlobalAPI";
+import { useParams } from "react-router-dom";
+import propTypes from "prop-types";
+
+const data2 = [
+  {
+    id: 0,
+    title: "",
+    companyName: "",
+    state: "",
+    startDate: "",
+    endDate: "",
+    workSummaryRaw: "",
+    workSummary: [],
+  },
+];
 
 const formField = {
+  id: 0,
   title: "",
   companyName: "",
-  city: "",
   state: "",
   startDate: "",
   endDate: "",
-  workSummary: "",
+  workSummaryRaw: "",
+  workSummary: [],
 };
 
-function Experience() {
-  const [experienceList, setExperienceList] = useState(formField);
-  const [isLoading, setIsLoading] = useState(false);
+Experience.propTypes = {
+  setIsLoading: propTypes.func.isRequired,
+};
+
+function Experience({ setIsLoading }) {
+  const { resumeId } = useParams();
+  const { setResumeInfo } = useResumeContext();
+  const [data1, setData1] = useState(data2);
+  const [totalExperience, setTotalExperience] = useState(data1.length);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [experienceList, setExperienceList] = useState(data1[tabIndex]);
+
+  useEffect(() => {
+    if (tabIndex < data1.length) {
+      setExperienceList(data1[tabIndex]);
+    } else {
+      const newExperience = { ...formField, id: totalExperience - 1 };
+      setData1((prev) => [...prev, newExperience]);
+      setExperienceList(newExperience);
+    }
+  }, [tabIndex, data1, totalExperience]);
+
+  useEffect(() => {
+    setResumeInfo((resumeInfo) => ({ ...resumeInfo, experience: data1 }));
+    async function saveData() {
+      try {
+        if (data2.length === 1) {
+          setIsLoading(true);
+          const data = {
+            data: {
+              userExperience: JSON.stringify(data1),
+            },
+          };
+          const updatePromise = GlobalAPI.UpdateResumeDetails(resumeId, data);
+          await updatePromise;
+          console.log(1);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    saveData();
+  }, [data1, setResumeInfo, setIsLoading, resumeId]);
+
   return (
-    <div className="max-h-[100dvh]">
-      <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-        {isLoading && <Loader2 />}
-        <h2 className="font-bold text-lg">Experience</h2>
-        <form>
-          <div className="grid grid-cols-2 mt-2 gap-3">
-            <div>
-              <label className="text-sm">Job Title</label>
-              <Input name="firstName" required />
-            </div>
-            <div>
-              <label className="text-sm">Company Name</label>
-              <Input name="lastName" />
-            </div>
-            <div className="col-span-2">
-              <label className="text-sm">Job Location</label>
-              <Input name="jobTitle" required />
-            </div>
-            <div>
-              <label className="text-sm">Start Date</label>
-              <Input name="address" required />
-            </div>
-            <div>
-              <label className="text-sm">End Date</label>
-              <Input name="phone" />
-            </div>
-            <div className="col-span-2">
-              <label>Job Summary</label>
-              <TextEditor />
-            </div>
-          </div>
-        </form>
-        <div className="flex justify-between mt-3">
-          <Button variant="outline" className="text-primary  border-primary">
-            + Add More Experience
-          </Button>
-          <Button>Save</Button>
-        </div>
-      </div>
+    <div>
+      <ExperienceItem
+        setTotalExperience={setTotalExperience}
+        totalExperience={totalExperience}
+        setTabIndex={setTabIndex}
+        tabIndex={tabIndex}
+        experienceList={experienceList}
+        data1={data1}
+        setData1={setData1}
+      />
     </div>
   );
 }
