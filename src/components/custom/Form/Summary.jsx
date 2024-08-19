@@ -10,10 +10,35 @@ import { Brain } from "lucide-react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
+import GlobalAPI from "../../../../service/GlobalAPI";
 
 const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
+  const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo } = useResumeContext();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        if (!resumeInfo.summary) {
+          setIsLoading(true);
+          const data = await GlobalAPI.getUserResumeData(resumeId);
+          const result = data.data.data;
+
+          if (result.length > 0) {
+            const { summary } = result[0];
+            setResumeInfo((prevData) => ({ ...prevData, summary }));
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getData();
+  }, []);
 
   function handleInputChange(e) {
     setResumeInfo({ ...resumeInfo, ["summary"]: e.target.value });
@@ -47,8 +72,27 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
     }
   }
 
+  async function saveSummary() {
+    try {
+      setIsLoading(true);
+      const data = {
+        data: {
+          summary: resumeInfo.summary,
+        },
+      };
+      await GlobalAPI.UpdateResumeDetails(resumeId, data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   function onSave(e) {
     e.preventDefault();
+    if (resumeInfo.summary && resumeInfo.summary.length > 0) {
+      saveSummary();
+    }
   }
 
   return (
@@ -63,6 +107,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
               <Button
                 className="border-primary text-primary gap-2"
                 variant="outline"
+                type="button"
                 onClick={GenerateSummaryFromAI}
               >
                 <Brain /> Modify with AI
@@ -74,7 +119,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
               onChange={handleInputChange}
             />
             <div className="mt-2 text-right">
-              <Button>Save</Button>
+              <Button variant="gooeyRight">Save</Button>
             </div>
           </div>
         </form>

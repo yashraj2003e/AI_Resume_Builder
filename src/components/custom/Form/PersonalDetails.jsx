@@ -27,7 +27,7 @@ function PersonalDetails({ setIsLoading }) {
           if (result.length > 0) {
             const { firstName, lastName, jobTitle, phone, address, email } =
               result[0];
-            setResumeInfo({
+            setResumeInfo((resumeInfo) => ({
               ...resumeInfo,
               firstName,
               lastName,
@@ -35,7 +35,7 @@ function PersonalDetails({ setIsLoading }) {
               phone,
               address,
               email,
-            });
+            }));
           }
 
           console.log(1);
