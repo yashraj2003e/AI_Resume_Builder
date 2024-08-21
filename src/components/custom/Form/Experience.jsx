@@ -16,6 +16,7 @@ const data2 = [
     endDate: "",
     workSummaryRaw: "",
     workSummary: [],
+    currentlyWorking: false,
   },
 ];
 
@@ -28,6 +29,7 @@ const formField = {
   endDate: "",
   workSummaryRaw: "",
   workSummary: [],
+  currentlyWorking: false,
 };
 
 Experience.propTypes = {
@@ -41,6 +43,29 @@ function Experience({ setIsLoading }) {
   const [totalExperience, setTotalExperience] = useState(data1.length);
   const [tabIndex, setTabIndex] = useState(0);
   const [experienceList, setExperienceList] = useState(data1[tabIndex]);
+
+  useEffect(() => {
+    setTotalExperience(data1.length);
+  }, [data1]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        console.log("YES");
+        setIsLoading(true);
+        const data = await GlobalAPI.getUserResumeData(resumeId);
+        const result = data.data.data;
+        if (result[0].userExperience.length > 0) {
+          setData1(result[0].userExperience);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getData();
+  }, [resumeId, setIsLoading]);
 
   useEffect(() => {
     if (tabIndex < data1.length) {

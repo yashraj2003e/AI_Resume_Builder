@@ -6,20 +6,23 @@ const data2 = [
   {
     id: 0,
     universityName: "",
+    location: "",
+    major: "",
+    degree: "",
     startDate: "",
     endDate: "",
-    degree: "",
-    description: [],
+    description: "",
   },
 ];
 
 const emptyData = {
   id: 0,
   universityName: "",
+  location: "",
+  degree: "",
   startDate: "",
   endDate: "",
-  degree: "",
-  description: [],
+  description: "",
 };
 
 function Education() {

@@ -30,7 +30,7 @@ function ExperienceItem({
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [workSummary, setWorkSummary] = useState("");
-  const [currentWorking, setCurrentlyWorking] = useState(false);
+  const [currentlyWorking, setCurrentlyWorking] = useState(false);
 
   useEffect(() => {
     setTitle(experienceList.title || "");
@@ -43,6 +43,7 @@ function ExperienceItem({
       experienceList.endDate ? reverseDate(experienceList.endDate) : ""
     );
     setWorkSummary(experienceList.workSummaryRaw || "");
+    setCurrentlyWorking(experienceList.currentlyWorking || false);
   }, [experienceList]);
 
   function updateData(operation) {
@@ -62,6 +63,7 @@ function ExperienceItem({
             endDate: endDate ? reverseDate(endDate) : "",
             workSummaryRaw: workSummary,
             workSummary: convertToArray(workSummary),
+            currentlyWorking,
           };
         }
         return item;
@@ -90,25 +92,37 @@ function ExperienceItem({
 
   function handleUpdates(e) {
     const { name, value } = e.target;
-    switch (name) {
-      case "title":
-        setTitle(value);
-        break;
-      case "companyName":
-        setCompanyName(value);
-        break;
-      case "city":
-        setCity(value);
-        break;
-      case "startDate":
-        setStartDate(value);
-        break;
-      case "endDate":
-        setEndDate(value);
-        break;
-      default:
-        throw new Error("Unknown Command !");
-    }
+
+    const actions = {
+      tite: setTitle,
+      companyName: setCompanyName,
+      city: setCity,
+      startDate: setStartDate,
+      endDate: setEndDate,
+    };
+
+    const update = actions(name);
+    update(value);
+
+    // switch (name) {
+    //   case "title":
+    //     setTitle(value);
+    //     break;
+    //   case "companyName":
+    //     setCompanyName(value);
+    //     break;
+    //   case "city":
+    //     setCity(value);
+    //     break;
+    //   case "startDate":
+    //     setStartDate(value);
+    //     break;
+    //   case "endDate":
+    //     setEndDate(value);
+    //     break;
+    //   default:
+    //     throw new Error("Unknown Command !");
+    // }
   }
 
   return (
@@ -149,21 +163,25 @@ function ExperienceItem({
               <label className="text-lg">End Date</label>
               <Input
                 name="endDate"
-                disabled={currentWorking}
+                disabled={currentlyWorking}
                 type="date"
                 value={endDate}
                 onChange={handleUpdates}
               />
             </div>
-            <div></div>
-            <div>
-              <span className="space-x-2">
+            <div className="col-start-2">
+              <span className="space-x-2 ">
                 <input
-                  onClick={() => setCurrentlyWorking((value) => !value)}
+                  onChange={() => setCurrentlyWorking((value) => !value)}
                   type="checkbox"
-                  className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  checked={currentlyWorking}
+                  className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 
+                  focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  id="endDateInput"
                 />
-                <label className="text-lg">Currently Working</label>
+                <label className="text-lg" htmlFor="endDateInput">
+                  Currently Working
+                </label>
               </span>
             </div>
             <div className="col-span-2 mt-[-1rem]">
