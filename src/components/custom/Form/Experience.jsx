@@ -38,7 +38,7 @@ Experience.propTypes = {
 
 function Experience({ setIsLoading }) {
   const { resumeId } = useParams();
-  const { setResumeInfo } = useResumeContext();
+  const { resumeInfo, setResumeInfo } = useResumeContext();
   const [data1, setData1] = useState(data2);
   const [totalExperience, setTotalExperience] = useState(data1.length);
   const [tabIndex, setTabIndex] = useState(0);
@@ -51,12 +51,17 @@ function Experience({ setIsLoading }) {
   useEffect(() => {
     async function getData() {
       try {
-        console.log("YES");
-        setIsLoading(true);
-        const data = await GlobalAPI.getUserResumeData(resumeId);
-        const result = data.data.data;
-        if (result[0].userExperience.length > 0) {
-          setData1(result[0].userExperience);
+        if (!resumeInfo.experience) {
+          console.log("Fetching experience data");
+          setIsLoading(true);
+          const data = await GlobalAPI.getUserResumeData(resumeId);
+          const result = data.data.data;
+          if (result[0].userExperience.length > 0) {
+            setData1(result[0].userExperience);
+          }
+        } else {
+          console.log("Setting data from resmeInfo");
+          setData1(resumeInfo.experience);
         }
       } catch (e) {
         console.log(e);
@@ -65,6 +70,7 @@ function Experience({ setIsLoading }) {
       }
     }
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resumeId, setIsLoading]);
 
   useEffect(() => {
