@@ -6,7 +6,10 @@ function reverseDate(date) {
 
 function getNewArray(resumeInfo) {
   let newData = resumeInfo;
-  newData = newData.map((obj) => ({ ...obj, rating: obj.rating * 20 }));
+  newData = newData.map((obj) => ({
+    ...obj,
+    rating: obj.rating < 20 ? obj.rating * 20 : obj.rating,
+  }));
   return newData;
 }
 

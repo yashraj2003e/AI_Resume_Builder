@@ -21,7 +21,10 @@ function ProfessionalExperience() {
           experience.state &&
           experience.startDate && (
             <div key={index} className="mt-5">
-              <h2 className="text-xl font-bold text-left">
+              <h2
+                className={"text-xl font-bold text-left"}
+                style={{ color: `${theme}` }}
+              >
                 {experience?.title}
               </h2>
               <h2 className="text-md flex justify-between my-1">

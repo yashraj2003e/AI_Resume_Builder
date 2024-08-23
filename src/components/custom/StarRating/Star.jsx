@@ -38,7 +38,8 @@ const Unfilled = ({ onHoverIn, onHoverOut, onClick }) => (
 );
 
 export default function Star({ data, setData, rating, starId }) {
-  const [tempRating, setTempRating] = useState(Number(Number(rating) / 20));
+  const derived = rating > 19 ? Number(rating) / 20 : rating;
+  const [tempRating, setTempRating] = useState(derived);
 
   return (
     <div className="flex justify-center">
@@ -61,7 +62,7 @@ export default function Star({ data, setData, rating, starId }) {
           }}
           full={tempRating >= i + 1}
           onHoverIn={() => setTempRating(i + 1)}
-          onHoverOut={() => setTempRating(rating)}
+          onHoverOut={() => setTempRating(derived)}
         />
       ))}
     </div>

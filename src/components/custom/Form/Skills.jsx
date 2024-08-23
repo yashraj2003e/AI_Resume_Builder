@@ -6,6 +6,7 @@ import { Button } from "../../ui/button";
 import { useResumeContext } from "../../../contexts/ResumeContext";
 import GlobalAPI from "../../../../service/GlobalAPI";
 import { useParams } from "react-router-dom";
+import { getNewArray } from "../../../../service/utils";
 
 Skills.propTypes = {
   setIsLoading: proptypes.func.isRequired,
@@ -67,7 +68,7 @@ function Skills({ setIsLoading }) {
   function handleSave(e) {
     e.preventDefault();
     const newData = data.map((obj) => ({ ...obj, rating: obj.rating }));
-    setResumeInfo((resume) => ({ ...resume, skills: newData }));
+    setResumeInfo((resume) => ({ ...resume, skills: getNewArray(newData) }));
     async function saveData() {
       try {
         console.log("Saving Data");
