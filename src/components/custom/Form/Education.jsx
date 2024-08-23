@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import EducationItem from "./EducationItem";
-import { useResumeContext } from "../../../contexts/ResumeContext";
-import GlobalAPI from "../../../../service/GlobalAPI";
 import { useParams } from "react-router-dom";
+import { useResumeContext } from "../../../contexts/ResumeContext";
+import EducationItem from "./EducationItem";
 import propTypes from "prop-types";
+import GlobalAPI from "../../../../service/GlobalAPI";
 
 const data2 = [
   {
@@ -37,37 +37,39 @@ function Education({ setIsLoading }) {
   const { resumeInfo, setResumeInfo } = useResumeContext();
   const [totalExperience, setTotalExperience] = useState(1);
   const [tabIndex, setTabIndex] = useState(0);
-  const [data1, setData1] = useState(data2);
+  const [data1, setData1] = useState(
+    resumeInfo?.education?.length > 0 ? resumeInfo?.education : data2
+  );
   const [experienceList, setExperienceList] = useState(data1[tabIndex]);
 
   useEffect(() => {
     setTotalExperience(data1.length);
   }, [data1.length]);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        if (!resumeInfo.education) {
-          console.log("fetching education data");
-          setIsLoading(true);
-          const data = await GlobalAPI.getUserResumeData(resumeId);
-          const result = data.data.data;
-          if (result[0].userEducation.length > 0) {
-            setData1(result[0].userEducation);
-          }
-        } else {
-          console.log("Setting data from resumeInfo");
-          setData1(resumeInfo.education);
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resumeId, setIsLoading]);
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       if (!resumeInfo.education) {
+  //         console.log("fetching education data");
+  //         setIsLoading(true);
+  //         const data = await GlobalAPI.getUserResumeData(resumeId);
+  //         const result = data.data.data;
+  //         if (result[0].userEducation.length > 0) {
+  //           setData1(result[0].userEducation);
+  //         }
+  //       } else {
+  //         console.log("Setting data from resumeInfo");
+  //         setData1(resumeInfo.education);
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   getData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [resumeId, setIsLoading]);
 
   useEffect(() => {
     if (tabIndex < data1.length) {
@@ -97,8 +99,9 @@ function Education({ setIsLoading }) {
         setIsLoading(false);
       }
     }
-    saveData();
-  }, [data1, resumeId, setIsLoading, setResumeInfo]);
+    if (data1[0]?.universityName != "" && resumeInfo.education != data1)
+      saveData();
+  }, [data1, resumeId, setIsLoading, setResumeInfo, resumeInfo.education]);
 
   return (
     <div>

@@ -7,12 +7,6 @@ import { useResumeContext } from "../../../contexts/ResumeContext";
 import GlobalAPI from "../../../../service/GlobalAPI";
 import { useParams } from "react-router-dom";
 
-function getNewArray(resumeInfo) {
-  let newData = resumeInfo;
-  newData = newData.map((obj) => ({ ...obj, rating: obj.rating * 20 }));
-  return newData;
-}
-
 Skills.propTypes = {
   setIsLoading: proptypes.func.isRequired,
 };
@@ -21,53 +15,59 @@ function Skills({ setIsLoading }) {
   const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo } = useResumeContext();
   const [totalSkills, setTotalSkills] = useState(0);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(
+    resumeInfo?.skills?.length > 0 ? resumeInfo?.skills : []
+  );
 
   useEffect(() => setTotalSkills(data.length), [data.length]);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        if (data.length === 0 && resumeInfo.skills.length === 0) {
-          console.log("fetching skills data");
-          setIsLoading(true);
-          const data1 = await GlobalAPI.getUserResumeData(resumeId);
-          const result = data1.data.data;
-          if (result[0].userSkills.length > 0) {
-            setData(result[0].userSkills);
-            setResumeInfo((prev) => ({
-              ...prev,
-              skills: getNewArray(result[0].userSkills),
-            }));
-          }
-        } else if (data.length === 0) {
-          console.log("setting from resumeInfo Skills");
-          console.log(resumeInfo.skills);
-          setData(resumeInfo.skills);
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getData();
-  }, [data, resumeId, resumeInfo.skills, setIsLoading, setResumeInfo]);
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       if (data.length === 0 && resumeInfo.skills.length === 0) {
+  //         console.log("fetching skills data");
+  //         setIsLoading(true);
+  //         const data1 = await GlobalAPI.getUserResumeData(resumeId);
+  //         const result = data1.data.data;
+  //         if (result[0].userSkills.length > 0) {
+  //           setData(result[0].userSkills);
+  //           setResumeInfo((prev) => ({
+  //             ...prev,
+  //             skills: getNewArray(result[0].userSkills),
+  //           }));
+  //         }
+  //       } else if (data.length === 0) {
+  //         console.log("setting from resumeInfo Skills");
+  //         console.log(resumeInfo.skills);
+  //         setData(resumeInfo.skills);
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   getData();
+  // }, [data, resumeId, resumeInfo.skills, setIsLoading, setResumeInfo]);
 
-  useEffect(() => {
-    if (data.length === 0 && resumeInfo.skills.length > 0) {
-      let newData = [...resumeInfo.skills];
-      newData = newData.map((obj) => ({ ...obj, rating: obj.rating }));
-      console.log(newData);
-      setData(newData);
-      setTotalSkills(resumeInfo.skills.length);
-    }
-  }, [resumeInfo, data]);
+  // useEffect(() => {
+  //   if (
+  //     data.length === 0 &&
+  //     resumeInfo.skills &&
+  //     resumeInfo.skills.length > 0
+  //   ) {
+  //     let newData = [...resumeInfo.skills];
+  //     newData = newData.map((obj) => ({ ...obj, rating: obj.rating }));
+  //     console.log(newData);
+  //     setData(newData);
+  //     setTotalSkills(resumeInfo.skills.length);
+  //   }
+  // }, [resumeInfo, data]);
 
   function handleSave(e) {
     e.preventDefault();
     const newData = data.map((obj) => ({ ...obj, rating: obj.rating }));
-    setResumeInfo((resume) => ({ ...resume, skills: getNewArray(newData) }));
+    setResumeInfo((resume) => ({ ...resume, skills: newData }));
     async function saveData() {
       try {
         console.log("Saving Data");

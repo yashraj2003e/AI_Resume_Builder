@@ -38,7 +38,7 @@ const Unfilled = ({ onHoverIn, onHoverOut, onClick }) => (
 );
 
 export default function Star({ data, setData, rating, starId }) {
-  const [tempRating, setTempRating] = useState(rating);
+  const [tempRating, setTempRating] = useState(Number(Number(rating) / 20));
 
   return (
     <div className="flex justify-center">

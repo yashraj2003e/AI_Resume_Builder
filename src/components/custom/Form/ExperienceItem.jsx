@@ -94,35 +94,15 @@ function ExperienceItem({
     const { name, value } = e.target;
 
     const actions = {
-      tite: setTitle,
+      title: setTitle,
       companyName: setCompanyName,
       city: setCity,
       startDate: setStartDate,
       endDate: setEndDate,
     };
 
-    const update = actions(name);
+    const update = actions[name];
     update(value);
-
-    // switch (name) {
-    //   case "title":
-    //     setTitle(value);
-    //     break;
-    //   case "companyName":
-    //     setCompanyName(value);
-    //     break;
-    //   case "city":
-    //     setCity(value);
-    //     break;
-    //   case "startDate":
-    //     setStartDate(value);
-    //     break;
-    //   case "endDate":
-    //     setEndDate(value);
-    //     break;
-    //   default:
-    //     throw new Error("Unknown Command !");
-    // }
   }
 
   return (

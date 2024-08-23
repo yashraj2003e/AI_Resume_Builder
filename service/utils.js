@@ -4,6 +4,12 @@ function reverseDate(date) {
   return result;
 }
 
+function getNewArray(resumeInfo) {
+  let newData = resumeInfo;
+  newData = newData.map((obj) => ({ ...obj, rating: obj.rating * 20 }));
+  return newData;
+}
+
 function convertToArray(str) {
   var str1 = str.replace(/<br>/g, "");
   str1 = str1.replace(/<\/?ul>/g, "");
@@ -12,4 +18,4 @@ function convertToArray(str) {
   return str1.split(",");
 }
 
-export { reverseDate, convertToArray };
+export { reverseDate, convertToArray, getNewArray };

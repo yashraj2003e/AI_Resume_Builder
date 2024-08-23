@@ -18,27 +18,27 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
   const { resumeInfo, setResumeInfo } = useResumeContext();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        if (!resumeInfo.summary) {
-          setIsLoading(true);
-          const data = await GlobalAPI.getUserResumeData(resumeId);
-          const result = data.data.data;
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       if (!resumeInfo.summary) {
+  //         setIsLoading(true);
+  //         const data = await GlobalAPI.getUserResumeData(resumeId);
+  //         const result = data.data.data;
 
-          if (result.length > 0) {
-            const { summary } = result[0];
-            setResumeInfo((prevData) => ({ ...prevData, summary }));
-          }
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getData();
-  }, []);
+  //         if (result.length > 0) {
+  //           const { summary } = result[0];
+  //           setResumeInfo((prevData) => ({ ...prevData, summary }));
+  //         }
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   getData();
+  // }, []);
 
   function handleInputChange(e) {
     setResumeInfo({ ...resumeInfo, ["summary"]: e.target.value });

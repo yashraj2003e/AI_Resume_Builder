@@ -6,7 +6,8 @@ import GlobalAPI from "../../../../service/GlobalAPI";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { getNewArray } from "../../../../service/utils";
 
 PersonalDetails.propTypes = {
   setIsLoading: PropTypes.func.isRequired,
@@ -15,30 +16,44 @@ PersonalDetails.propTypes = {
 function PersonalDetails({ setIsLoading }) {
   const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo } = useResumeContext();
+  const isFirstMount = useRef();
+  isFirstMount.current = true;
 
   useEffect(() => {
-    async function test() {
+    async function getData() {
       try {
-        if (!resumeInfo.firstName) {
-          setIsLoading(true);
-          const data = await GlobalAPI.getUserResumeData(resumeId);
-          const result = data.data.data;
+        setIsLoading(true);
+        const data = await GlobalAPI.getUserResumeData(resumeId);
+        const result = data.data.data;
+        if (result.length > 0) {
+          let {
+            firstName,
+            lastName,
+            jobTitle,
+            phone,
+            address,
+            email,
+            summary,
+            userEducation: education,
+            userExperience: experience,
+            userSkills: skills,
+          } = result[0];
 
-          if (result.length > 0) {
-            const { firstName, lastName, jobTitle, phone, address, email } =
-              result[0];
-            setResumeInfo((resumeInfo) => ({
-              ...resumeInfo,
-              firstName,
-              lastName,
-              jobTitle,
-              phone,
-              address,
-              email,
-            }));
-          }
+          skills = getNewArray(skills);
 
-          console.log(1);
+          setResumeInfo((prevInfo) => ({
+            ...prevInfo,
+            firstName,
+            lastName,
+            jobTitle,
+            phone,
+            address,
+            email,
+            summary,
+            education,
+            experience,
+            skills,
+          }));
         }
       } catch (e) {
         console.log(e);
@@ -46,7 +61,12 @@ function PersonalDetails({ setIsLoading }) {
         setIsLoading(false);
       }
     }
-    test();
+
+    if (isFirstMount.current == true) {
+      getData();
+      isFirstMount.current = false;
+      console.log(isFirstMount.current + " 65");
+    }
   }, []);
 
   function handleInputChange(e) {
