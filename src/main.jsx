@@ -4,9 +4,9 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
-import EditResume from "./Pages/EditResume.jsx";
 import Loader2 from "./components/custom/Loader2.jsx";
 import Error from "./Pages/Error.jsx";
+import ResumeLayout from "./components/custom/Resume/ResumeLayout.jsx";
 
 const SignInPage = lazy(() => import("./auth/sign-in/SignIn.jsx"));
 const Home = lazy(() => import("./Pages/Home.jsx"));
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
           },
           {
             path: "dashboard/resume/:resumeId/edit",
-            element: <EditResume />,
+            element: <ResumeLayout />,
           },
         ],
       },

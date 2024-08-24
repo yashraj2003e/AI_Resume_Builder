@@ -5,7 +5,7 @@ export default {
   address: "",
   phone: "",
   email: "",
-  themeColor: "#ff6666",
+  themeColor: "#28282B",
   summary: "",
   experience: [],
   education: [],

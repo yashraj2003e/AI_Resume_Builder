@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useResumeContext } from "../../../contexts/ResumeContext";
 import EducationItem from "./EducationItem";
-import propTypes from "prop-types";
 import GlobalAPI from "../../../../service/GlobalAPI";
 
 const data2 = [
@@ -28,13 +27,9 @@ const emptyData = {
   description: "",
 };
 
-Education.propTypes = {
-  setIsLoading: propTypes.func.isRequired,
-};
-
-function Education({ setIsLoading }) {
+function Education() {
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useResumeContext();
+  const { resumeInfo, setResumeInfo, setIsLoading } = useResumeContext();
   const [totalExperience, setTotalExperience] = useState(1);
   const [tabIndex, setTabIndex] = useState(0);
   const [data1, setData1] = useState(

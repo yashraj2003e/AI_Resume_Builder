@@ -15,8 +15,8 @@ import GlobalAPI from "../../../../service/GlobalAPI";
 
 const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useResumeContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const { resumeInfo, setResumeInfo, setIsLoading, isLoading } =
+    useResumeContext();
 
   // useEffect(() => {
   //   async function getData() {

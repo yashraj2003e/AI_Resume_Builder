@@ -1,4 +1,3 @@
-import proptypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import Star from "../StarRating/Star";
@@ -8,13 +7,9 @@ import GlobalAPI from "../../../../service/GlobalAPI";
 import { useParams } from "react-router-dom";
 import { getNewArray } from "../../../../service/utils";
 
-Skills.propTypes = {
-  setIsLoading: proptypes.func.isRequired,
-};
-
-function Skills({ setIsLoading }) {
+function Skills() {
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useResumeContext();
+  const { resumeInfo, setResumeInfo, setIsLoading } = useResumeContext();
   const [totalSkills, setTotalSkills] = useState(0);
   const [data, setData] = useState(
     resumeInfo?.skills?.length > 0 ? resumeInfo?.skills : []

@@ -4,7 +4,6 @@ import { useResumeContext } from "../../../contexts/ResumeContext";
 import "react-toastify/dist/ReactToastify.css";
 import GlobalAPI from "../../../../service/GlobalAPI";
 import { useParams } from "react-router-dom";
-import propTypes from "prop-types";
 
 const data2 = [
   {
@@ -32,13 +31,9 @@ const formField = {
   currentlyWorking: false,
 };
 
-Experience.propTypes = {
-  setIsLoading: propTypes.func.isRequired,
-};
-
-function Experience({ setIsLoading }) {
+function Experience() {
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useResumeContext();
+  const { resumeInfo, setResumeInfo, setIsLoading } = useResumeContext();
   const [data1, setData1] = useState(
     resumeInfo?.experience?.length > 0 ? resumeInfo?.experience : data2
   );

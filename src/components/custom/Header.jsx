@@ -5,7 +5,7 @@ function Header() {
   const { isSignedIn } = useUser();
   const navigate = useNavigate();
   return (
-    <div className="px-5 py-3 flex justify-between items-center max-h-[10dvh]">
+    <div className="px-5 py-3 flex justify-between items-center max-h-[10=dvh]">
       <img
         src="/logo.svg"
         alt="Logo"
