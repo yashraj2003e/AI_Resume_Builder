@@ -6,7 +6,7 @@ function EducationalPreview() {
   return (
     <div>
       <h2
-        className="text-center font-bold text-2xl mb-2"
+        className="text-center font-bold text-3xl mb-2"
         style={{ color: `${theme}` }}
       >
         Education
@@ -16,7 +16,7 @@ function EducationalPreview() {
       {resumeInfo?.education?.map((education, index) => (
         <div key={index} className="my-3">
           <h2
-            className="text-xl font-bold text-left"
+            className="text-2xl font-bold text-left"
             style={{ color: `${theme}` }}
           >
             {education.universityName}
@@ -33,7 +33,7 @@ function EducationalPreview() {
               </span>
             )}
           </div>
-          <p className="text-justify text-sm">{education.description}</p>
+          <p className="text-justify text-md">{education.description}</p>
         </div>
       ))}
     </div>

@@ -6,7 +6,7 @@ function SkillsPreview() {
   return (
     <div>
       <h2
-        className="text-center font-bold text-2xl mb-2 mt-[-0.75rem]"
+        className="text-center font-bold text-3xl mb-2 mt-[-0.75rem]"
         style={{ color: `${theme}` }}
       >
         Technical Skills
@@ -15,7 +15,7 @@ function SkillsPreview() {
       <div className="grid grid-cols-2 gap-3 my-4">
         {resumeInfo?.skills?.map((skill, index) => (
           <div key={index} className="flex items-center justify-between">
-            <h2 className="text-sm">{skill.name}</h2>
+            <h2 className="text-md">{skill.name}</h2>
             <div className="h-2 bg-gray-200 w-[50%]">
               <div
                 className="h-2"

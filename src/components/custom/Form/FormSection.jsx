@@ -14,12 +14,9 @@ import { useResumeContext } from "../../../contexts/ResumeContext";
 
 FormSection.propTypes = {
   setIsLoading: PropTypes.func.isRequired,
-  visited: PropTypes.shape({
-    current: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
-function FormSection({ setIsLoading, visited }) {
+function FormSection({ setIsLoading }) {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [AIGeneratedSummary, setAIGeneratedSummary] = useState([]);
   const { setResumeInfo } = useResumeContext();
