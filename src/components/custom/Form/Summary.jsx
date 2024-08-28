@@ -114,7 +114,7 @@ const Summary = ({ AIGeneratedSummary, setAIGeneratedSummary }) => {
               </Button>
             </div>
             <Textarea
-              className="mt-2 text-md h-[200px]"
+              className="mt-2 text-md"
               defaultValue={resumeInfo.summary}
               onChange={handleInputChange}
             />

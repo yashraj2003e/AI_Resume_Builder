@@ -3,7 +3,7 @@ import Layout from "../components/custom/Home/Layout";
 
 function Home() {
   return (
-    <div style={{ backgroundColor: "#F5F5F5" }}>
+    <div style={{ backgroundColor: "#FAFAFA" }}>
       <Header />
       <Layout />
     </div>

@@ -6,7 +6,7 @@ function SkillsPreview() {
   return (
     <div>
       <h2
-        className="text-center font-bold text-3xl mb-2 mt-[-0.75rem]"
+        className="text-center font-normal text-3xl mb-2 mt-[-0.75rem]"
         style={{ color: `${theme}` }}
       >
         Technical Skills

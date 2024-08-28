@@ -6,7 +6,7 @@ function EducationalPreview() {
   return (
     <div>
       <h2
-        className="text-center font-bold text-3xl mb-2"
+        className="text-center font-normal text-3xl mb-2"
         style={{ color: `${theme}` }}
       >
         Education

@@ -12,10 +12,10 @@ function PersonalDetailsPreview() {
       className={`text-center shadow-2xl border-t-[2.5dvh] px-4 overflow-scroll rounded-t-2xl sm:h-[85dvh]`}
       style={{ borderColor: `${theme}` }}
     >
-      <h2 className={`font-bold text-4xl`} style={{ color: `${theme}` }}>
+      <h2 className="text-4xl font-normal" style={{ color: `${theme}` }}>
         {resumeInfo?.firstName} {resumeInfo?.lastName}
       </h2>
-      <h2 className=" text-1xl font-medium">{resumeInfo?.jobTitle}</h2>
+      <h2 className=" text-xl">{resumeInfo?.jobTitle}</h2>
       <h2 className="font-normal text-md">{resumeInfo?.address}</h2>
       <div className="flex justify-between">
         <h2 className="font-normal text-md">{resumeInfo?.phone}</h2>
