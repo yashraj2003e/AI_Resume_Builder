@@ -4,11 +4,21 @@ import GlobalAPI from "../../service/GlobalAPI";
 import { useEffect, useState } from "react";
 import ResumeItem from "../components/custom/Resume/ResumeItem";
 import Loader2 from "../components/custom/Loader2";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Zoom } from "react-toastify";
 
 function Dashboard() {
   const { user } = useUser();
   const [resumeList, setResumeList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    toast.info("Resume UI is under development !", {
+      position: "top-center",
+      style: { minWidth: "max-content" },
+    });
+  }, []);
 
   useEffect(() => {
     async function getResumesList() {
@@ -38,6 +48,13 @@ function Dashboard() {
           <ResumeItem key={index} resume={resume} />
         ))}
       </div>
+      <ToastContainer
+        transition={Zoom}
+        hideProgressBar={true}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+        autoClose={1000}
+      />
     </div>
   );
 }
