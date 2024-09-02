@@ -14,6 +14,8 @@ EducationItem.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       universityName: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      major: PropTypes.string.isRequired,
       degree: PropTypes.string.isRequired,
       startDate: PropTypes.string.isRequired,
       endDate: PropTypes.string.isRequired,
@@ -34,6 +36,8 @@ function EducationItem({
 }) {
   const [educationalDetails, setEducationalDetails] = useState({
     universityName: "",
+    location: "",
+    major: "",
     degree: "",
     startDate: "",
     endDate: "",
@@ -43,6 +47,8 @@ function EducationItem({
   useEffect(() => {
     setEducationalDetails({
       universityName: experienceList.universityName || "",
+      location: experienceList.location || "",
+      major: experienceList.major || "",
       degree: experienceList.degree || "",
       startDate: experienceList.startDate || "",
       endDate: experienceList.endDate || "",
@@ -61,6 +67,8 @@ function EducationItem({
           return {
             ...item,
             universityName: educationalDetails.universityName,
+            location: educationalDetails.location,
+            major: educationalDetails.major,
             degree: educationalDetails.degree,
             startDate: educationalDetails.startDate,
             endDate: educationalDetails.endDate,
@@ -91,6 +99,7 @@ function EducationItem({
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(educationalDetails);
     updateData("save");
   }
 
@@ -116,16 +125,8 @@ function EducationItem({
             <div>
               <label className="text-lg">Location</label>
               <Input
-                name="universityName"
-                value={educationalDetails.universityName}
-                onChange={handleUpdate}
-              />
-            </div>
-            <div className="mt-1">
-              <label className="text-lg">Major</label>
-              <Input
-                name="degree"
-                value={educationalDetails.degree}
+                name="location"
+                value={educationalDetails.location}
                 onChange={handleUpdate}
               />
             </div>
@@ -138,9 +139,18 @@ function EducationItem({
               />
             </div>
             <div className="mt-1">
+              <label className="text-lg">Major</label>
+              <Input
+                name="major"
+                value={educationalDetails.major}
+                onChange={handleUpdate}
+              />
+            </div>
+            <div className="mt-1">
               <label className="text-lg">Start Date</label>
               <Input
                 name="startDate"
+                type="date"
                 value={educationalDetails.startDate}
                 onChange={handleUpdate}
               />
@@ -148,6 +158,7 @@ function EducationItem({
             <div className="mt-1">
               <label className="text-lg">End Date</label>
               <Input
+                type="date"
                 name="endDate"
                 value={educationalDetails.endDate}
                 onChange={handleUpdate}

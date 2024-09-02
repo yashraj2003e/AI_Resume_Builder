@@ -1,11 +1,11 @@
-import { UserButton } from "@clerk/clerk-react";
 import Header from "../components/custom/Header";
+import Layout from "../components/custom/Home/Layout";
 
 function Home() {
   return (
-    <div>
+    <div style={{ backgroundColor: "#FAFAFA" }}>
       <Header />
-      <UserButton />
+      <Layout />
     </div>
   );
 }

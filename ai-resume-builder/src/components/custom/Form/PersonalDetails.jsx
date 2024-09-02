@@ -5,49 +5,10 @@ import { Input } from "../../ui/input";
 import GlobalAPI from "../../../../service/GlobalAPI";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PropTypes from "prop-types";
-import { useEffect } from "react";
 
-PersonalDetails.propTypes = {
-  setIsLoading: PropTypes.func.isRequired,
-};
-
-function PersonalDetails({ setIsLoading }) {
+function PersonalDetails() {
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useResumeContext();
-
-  useEffect(() => {
-    async function test() {
-      try {
-        if (!resumeInfo.firstName) {
-          setIsLoading(true);
-          const data = await GlobalAPI.getUserResumeData(resumeId);
-          const result = data.data.data;
-
-          if (result.length > 0) {
-            const { firstName, lastName, jobTitle, phone, address, email } =
-              result[0];
-            setResumeInfo((resumeInfo) => ({
-              ...resumeInfo,
-              firstName,
-              lastName,
-              jobTitle,
-              phone,
-              address,
-              email,
-            }));
-          }
-
-          console.log(1);
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    test();
-  }, []);
+  const { resumeInfo, setResumeInfo, setIsLoading } = useResumeContext();
 
   function handleInputChange(e) {
     const { name, value } = e.target;

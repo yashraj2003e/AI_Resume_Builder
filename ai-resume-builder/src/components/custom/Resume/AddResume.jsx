@@ -14,6 +14,12 @@ import GlobalAPI from "../../../../service/GlobalAPI";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { useKey } from "../../../../service/useKey";
+import propType from "prop-types";
+
+AddResume.propTypes = {
+  isLoading: propType.bool.isRequired,
+  setIsLoading: propType.func.isRequired,
+};
 
 function AddResume({ isLoading, setIsLoading }) {
   const [resumeTitle, setResumeTitle] = useState("");
@@ -43,7 +49,7 @@ function AddResume({ isLoading, setIsLoading }) {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="p-14 py-24  items-center flex justify-center bg-secondary rounded-lg mt-10 h-[280px] hover:scale-105 transition-all hover:shadow-md hover:cursor-pointer border-dotted border-4">
+          <div className="p-14 py-24 items-center flex justify-center bg-secondary rounded-lg mt-10 h-[280px] hover:scale-105 transition-all hover:shadow-md hover:cursor-pointer border-dotted border-4">
             <PlusSquare />
           </div>
         </DialogTrigger>

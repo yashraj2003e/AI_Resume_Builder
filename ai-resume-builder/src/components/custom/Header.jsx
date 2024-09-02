@@ -5,26 +5,21 @@ function Header() {
   const { isSignedIn } = useUser();
   const navigate = useNavigate();
   return (
-    <div className="px-5 py-3 flex justify-between items-center shadow-lg max-h-[10dvh]">
+    <div className="px-5 py-3 flex justify-between items-center max-h-[10=dvh]">
       <img
-        src="/logo.svg"
+        src="/logo1.png"
         alt="Logo"
-        width={100}
-        height={100}
+        // className="h-50"
         onClick={() => navigate("/")}
         style={{ cursor: "pointer" }}
       />
-      {isSignedIn ? (
+      {isSignedIn && (
         <div className="flex gap-2">
           <Link to={"/dashboard"}>
             <Button variant="outline">Dashboard</Button>
           </Link>
           <UserButton />
         </div>
-      ) : (
-        <Link to={"/auth/sign-in"}>
-          <Button variant="gooeyRight">Get Started</Button>
-        </Link>
       )}
     </div>
   );

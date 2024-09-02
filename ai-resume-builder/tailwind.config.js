@@ -15,6 +15,10 @@ export const theme = {
       "2xl": "1400px",
     },
   },
+  fontFamily: {
+    home: "Raleway",
+    resume: "default",
+  },
   extend: {
     colors: {
       border: "hsl(var(--border))",
