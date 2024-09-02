@@ -18,7 +18,7 @@ function Layout() {
                 to="/dashboard"
                 className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
               >
-                Get Started
+                Get Started Now
               </Link>
             </div>
             <div className="px-3 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
