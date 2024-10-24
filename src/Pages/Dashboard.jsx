@@ -20,22 +20,24 @@ function Dashboard() {
     });
   }, []);
 
-  useEffect(() => {
-    async function getResumesList() {
-      if (user?.primaryEmailAddress?.emailAddress && resumeList.length === 0) {
-        setIsLoading(true);
-        const response = await GlobalAPI.getUserResumes(
-          user.primaryEmailAddress.emailAddress
-        );
-        setIsLoading(false);
-        setResumeList(response.data.data);
-      }
-    }
+  // useEffect(() => {
+  //   async function getResumesList() {
+  //     if (user?.primaryEmailAddress?.emailAddress && resumeList.length === 0) {
+  //       setIsLoading(true);
+  //       const response = await GlobalAPI.getUserResumes(
+  //         user.primaryEmailAddress.emailAddress
+  //       );
+  //       console.log("Response !!!");
+  //       console.log(response.data);
+  //       setIsLoading(false);
+  //       setResumeList(response.data.data);
+  //     }
+  //   }
 
-    if (user) {
-      getResumesList();
-    }
-  }, [resumeList.length, user]);
+  //   if (user) {
+  //     getResumesList();
+  //   }
+  // }, [resumeList.length, user]);
 
   return (
     <div className="p-10 md:px-20 lg:px-32">

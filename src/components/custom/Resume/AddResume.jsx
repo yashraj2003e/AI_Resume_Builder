@@ -28,17 +28,17 @@ function AddResume({ isLoading, setIsLoading }) {
 
   async function createResume() {
     setIsLoading(true);
-    const data = {
-      data: {
-        title: resumeTitle,
-        resumeId: crypto.randomUUID(),
-        userEmail: user?.primaryEmailAddress?.emailAddress,
-        userName: user?.fullName,
-      },
-    };
-    const response = await GlobalAPI.CreateNewResume(data);
+    // const data = {
+    //   data: {
+    //     title: resumeTitle,
+    //     resumeId: crypto.randomUUID(),
+    //     userEmail: user?.primaryEmailAddress?.emailAddress,
+    //     userName: user?.fullName,
+    //   },
+    // };
+    // const response = await GlobalAPI.CreateNewResume(data);
     setIsLoading(false);
-    navigate(`/dashboard/resume/${response.data.data.documentId}/edit`);
+    navigate(`/dashboard/resume/${123}/edit`);
   }
 
   useKey("enter", createResume);
