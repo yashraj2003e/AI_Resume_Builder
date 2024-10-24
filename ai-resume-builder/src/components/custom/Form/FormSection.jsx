@@ -19,55 +19,55 @@ function FormSection() {
   const isFirstMount = useRef();
   isFirstMount.current = true;
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        setIsLoading(true);
-        const data = await GlobalAPI.getUserResumeData(resumeId);
-        const result = data.data.data;
-        if (result.length > 0) {
-          let {
-            firstName,
-            lastName,
-            jobTitle,
-            phone,
-            address,
-            email,
-            summary,
-            userEducation: education,
-            userExperience: experience,
-            userSkills: skills,
-          } = result[0];
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       setIsLoading(true);
+  //       const data = await GlobalAPI.getUserResumeData(resumeId);
+  //       const result = data.data.data;
+  //       if (result.length > 0) {
+  //         let {
+  //           firstName,
+  //           lastName,
+  //           jobTitle,
+  //           phone,
+  //           address,
+  //           email,
+  //           summary,
+  //           userEducation: education,
+  //           userExperience: experience,
+  //           userSkills: skills,
+  //         } = result[0];
 
-          skills = getNewArray(skills);
+  //         skills = getNewArray(skills);
 
-          setResumeInfo((prevInfo) => ({
-            ...prevInfo,
-            firstName,
-            lastName,
-            jobTitle,
-            phone,
-            address,
-            email,
-            summary,
-            education,
-            experience,
-            skills,
-          }));
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  //         setResumeInfo((prevInfo) => ({
+  //           ...prevInfo,
+  //           firstName,
+  //           lastName,
+  //           jobTitle,
+  //           phone,
+  //           address,
+  //           email,
+  //           summary,
+  //           education,
+  //           experience,
+  //           skills,
+  //         }));
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
 
-    if (isFirstMount.current == true) {
-      getData();
-      isFirstMount.current = false;
-      console.log(isFirstMount.current + " 65");
-    }
-  }, []);
+  //   if (isFirstMount.current == true) {
+  //     getData();
+  //     isFirstMount.current = false;
+  //     console.log(isFirstMount.current + " 65");
+  //   }
+  // }, []);
 
   return (
     <div className="px-4">

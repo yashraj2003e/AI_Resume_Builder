@@ -4,6 +4,9 @@ import GlobalAPI from "../../service/GlobalAPI";
 import { useEffect, useState } from "react";
 import ResumeItem from "../components/custom/Resume/ResumeItem";
 import Loader2 from "../components/custom/Loader2";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Zoom } from "react-toastify";
 
 function Dashboard() {
   const { user } = useUser();
@@ -11,21 +14,30 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    async function getResumesList() {
-      if (user?.primaryEmailAddress?.emailAddress && resumeList.length === 0) {
-        setIsLoading(true);
-        const response = await GlobalAPI.getUserResumes(
-          user.primaryEmailAddress.emailAddress
-        );
-        setIsLoading(false);
-        setResumeList(response.data.data);
-      }
-    }
+    toast.info("Resume UI is under development !", {
+      position: "top-center",
+      style: { minWidth: "max-content" },
+    });
+  }, []);
 
-    if (user) {
-      getResumesList();
-    }
-  }, [resumeList.length, user]);
+  // useEffect(() => {
+  //   async function getResumesList() {
+  //     if (user?.primaryEmailAddress?.emailAddress && resumeList.length === 0) {
+  //       setIsLoading(true);
+  //       const response = await GlobalAPI.getUserResumes(
+  //         user.primaryEmailAddress.emailAddress
+  //       );
+  //       console.log("Response !!!");
+  //       console.log(response.data);
+  //       setIsLoading(false);
+  //       setResumeList(response.data.data);
+  //     }
+  //   }
+
+  //   if (user) {
+  //     getResumesList();
+  //   }
+  // }, [resumeList.length, user]);
 
   return (
     <div className="p-10 md:px-20 lg:px-32">
@@ -38,6 +50,13 @@ function Dashboard() {
           <ResumeItem key={index} resume={resume} />
         ))}
       </div>
+      <ToastContainer
+        transition={Zoom}
+        hideProgressBar={true}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+        autoClose={1000}
+      />
     </div>
   );
 }
